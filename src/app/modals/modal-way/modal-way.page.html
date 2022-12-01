@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Annuler</ion-button>
+    </ion-buttons>
+    <ion-title>Nouveau trajet</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="confirm()">Valider</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- <ion-item>
+    <ion-label position="stacked">Avion</ion-label>
+    <ion-input [(ngModel)]="transport" placeholder=""></ion-input>
+  </ion-item> -->
+
+  <ion-item>
+    <ion-label position="stacked">
+      Transport
+    </ion-label>
+    <ion-select placeholder="Select Airport">
+      <ion-select-option value="avion">avion</ion-select-option>
+      <ion-select-option value="train">train</ion-select-option>
+      <ion-select-option value="bateau">bateau</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+
+  <ion-item>
+    <ion-label position="stacked">Lieu de depart</ion-label>
+    <ion-input [(ngModel)]="departure" placeholder=""></ion-input>
+  </ion-item>
+
+  <ion-item>
+  <ion-label position="stacked">Heure de depart</ion-label>
+  <ion-input [(ngModel)]="timedeparture" placeholder=""></ion-input>
+</ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Lieu d'arrivée</ion-label>
+    <ion-input [(ngModel)]="arrival" placeholder=""></ion-input>
+  </ion-item>
+
+  <ion-item>  
+    <ion-label position="stacked">Temps de trajet</ion-label>
+    <ion-input [(ngModel)]="traveltime" placeholder=""></ion-input>
+  </ion-item>
+
+  
+
+</ion-content>
+
+

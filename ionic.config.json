@@ -1,0 +1,8 @@
+{
+  "name": "PlanUr'trip",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "7043933f"
+}

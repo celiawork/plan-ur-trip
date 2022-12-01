@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Détail du séjour</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<p style="text-align:center ;">
+  {{traveltest.name}}
+</p>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button>
+      <ion-icon name="chevron-up-circle"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button>
+        <ion-icon name="accessibility-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="bed-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="globe" (click)='openFormWay()'  color="warning"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+
+<ion-accordion-group *ngFor="let item of travelDetails; index as i;">
+  <ion-accordion value="first">
+    <ion-icon name="globe"></ion-icon>
+    <ion-item slot="header" color="light">
+      <!-- <ion-label> {{travelDetails.departure}} </ion-label> -->
+      <ion-icon class="ion-padding-end" name="globe" color="warning"></ion-icon>
+      <ion-label> {{item.departure}} à {{item.timedeparture}} </ion-label>
+   
+    </ion-item>
+    <div class="ion-padding" slot="content">
+      <p>Départ : {{item.departure}} à {{item.timedeparture}}</p> 
+      <p>Arrivée : {{item.arrival}} </p> 
+    </div>
+  </ion-accordion>
+</ion-accordion-group>
+
+
+
+</ion-content>
