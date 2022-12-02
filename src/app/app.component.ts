@@ -7,8 +7,8 @@ import { Component, ViewChild } from '@angular/core';
 export class AppComponent {
 
   public appPages = [
-    { title: 'Voyages', url: '/travel/list-travel', icon: 'airplane-outline' },
-    { title: 'Calendrier', url: '/calendar', icon: 'calendar-outline' },
+    { title: 'Séjour', url: 'list-travel', icon: 'airplane-outline' },
+    { title: 'Calendrier', url: 'calendar', icon: 'calendar-outline' },
 
   ];
 

@@ -14,6 +14,7 @@ export class ModalWayPage  {
   arrival!:string;
   traveltime!:string;
   transport!:string;
+  date!: Date;
 
   constructor(private modalCtrl: ModalController) {}
 
@@ -31,7 +32,7 @@ export class ModalWayPage  {
       timedeparture: this.timedeparture,
       traveltime: this.traveltime,
       arrival: this.arrival,
-   
+      date: this.date
     };
     
     return this.modalCtrl.dismiss(data, 'confirm');

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { DetachedRouteHandle, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ModalWayPage } from 'src/app/modals/modal-way/modal-way.page';
 import { ModalPage } from 'src/app/modals/modal/modal.page';
-import { Travel } from 'src/app/models/travel';
+import { DetailTravel, Travel } from 'src/app/models/travel';
 import { TravelService } from 'src/app/services/travel.service';
 import { ActivatedRoute } from "@angular/router";
+import { Geolocation, Position } from '@capacitor/geolocation';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult } from '@awesome-cordova-plugins/native-geocoder/ngx';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-detail-travel',
@@ -14,39 +17,53 @@ import { ActivatedRoute } from "@angular/router";
 })
 export class DetailTravelPage implements OnInit {
 
-
-  traveltest = JSON.parse(localStorage.getItem('myTravel'+ this.route.snapshot.paramMap.get('id')) as string);
-  
-  travelDetails = JSON.parse(localStorage.getItem('myTravelDetails'+ this.route.snapshot.paramMap.get('id')) as string);
-
-  condition:boolean = false;
-
-  constructor(private modalCtrl: ModalController, private router: Router, private servicetravel: TravelService, private route: ActivatedRoute) { }
-
-
-  ngOnInit() {
+  optionsLocation: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 2
   }
 
-  async openFormWay() {
+  coordinates!: NativeGeocoderResult;
+  traveltest = JSON.parse(localStorage.getItem('myTravel' + this.route.snapshot.paramMap.get('id')) as string);
+  travelDetails = JSON.parse(localStorage.getItem('myTravelDetails' + this.route.snapshot.paramMap.get('id')) as string);
 
-      const modal = await this.modalCtrl.create({
-        component: ModalWayPage,
-      });
-      modal.present();
-  
-      const { data, role } = await modal.onWillDismiss();
-  
-      
-      if (role === 'confirm') {
+  travels:Travel[];
 
-        let key = this.route.snapshot.paramMap.get('id')
-        this.servicetravel.update(data, key);
-        this.condition = true;
- 
-       
-        
-      }
+  constructor(private modalCtrl: ModalController, private router: Router, private servicetravel: TravelService, private route: ActivatedRoute, private nativeGeocoder: NativeGeocoder) { 
+    this.travels = []
+  }
+
+  ngOnInit() {
     
   }
 
+  async openFormWay() {
+    const modal = await this.modalCtrl.create({
+      component: ModalWayPage,
+    });
+
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+    if (role === 'confirm') {
+      let key = this.route.snapshot.paramMap.get('id')
+      this.servicetravel.update(data, key);
+      this.travels.push(data);
+      this.travelDetails = JSON.parse(localStorage.getItem('myTravelDetails' + this.route.snapshot.paramMap.get('id')) as string);
+    }
+  }
+
+  async geoLocalise(item: DetailTravel) {
+    const location = await Geolocation.getCurrentPosition();
+    this.nativeGeocoder.reverseGeocode(location.coords.latitude, location.coords.longitude, this.optionsLocation).then((result: NativeGeocoderResult[]) => {
+      item.coordinates = result[0];
+      this.coordinates = item.coordinates;
+    })
+  }
+
+  async openMap() {
+    await Browser.open({
+      url:
+        `https://www.google.com/maps/search/?api=1&query=${this.coordinates.latitude}%2C${this.coordinates.longitude}`
+    });
+  }
 }

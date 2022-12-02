@@ -1,3 +1,5 @@
+import { NativeGeocoderResult } from "@awesome-cordova-plugins/native-geocoder/ngx";
+
 export interface Travel {
 	id: string;
 	name: string;
@@ -13,4 +15,5 @@ export interface DetailTravel {
 	traveltime?:string;
 	date?: Date;
 	transport?: string;
+	coordinates?: NativeGeocoderResult;
 } 

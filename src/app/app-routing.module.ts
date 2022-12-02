@@ -8,10 +8,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },
-  {
     path: 'list-travel',
     loadChildren: () => import('./pages/travel/list-travel/list-travel.module').then( m => m.ListTravelPageModule)
   },
@@ -26,10 +22,6 @@ const routes: Routes = [
   {
     path: 'modal-way',
     loadChildren: () => import('./modals/modal-way/modal-way.module').then( m => m.ModalWayPageModule)
-  },
-  {
-    path: 'menu',
-    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
   },
 ];
 
