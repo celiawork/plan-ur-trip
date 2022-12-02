@@ -23,10 +23,6 @@ const routes: Routes = [
     path: 'modal-way',
     loadChildren: () => import('./modals/modal-way/modal-way.module').then( m => m.ModalWayPageModule)
   },
-  {
-    path: 'splash',
-    loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
-  },
 ];
 
 @NgModule({
