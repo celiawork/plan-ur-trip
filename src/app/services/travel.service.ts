@@ -16,11 +16,9 @@ export class TravelService implements OnInit {
   }
 
   ngOnInit(): void {
-  
     let key = this.route.snapshot.paramMap.get('id')
     const travelDetails = JSON.parse(localStorage.getItem('myTravelDetails' + key) as string);
     this.detailsTravels.push(travelDetails);
-
   }
 
   getAll() {
@@ -31,6 +29,7 @@ export class TravelService implements OnInit {
   }
 
   save(travel: Travel) {
+    this.detailsTravels = []
     this.travels.push(travel);
     localStorage.setItem('myTravel' + travel.id, JSON.stringify(travel));
     localStorage.setItem('allTravel', JSON.stringify(this.travels));

@@ -47,8 +47,8 @@ export class DetailTravelPage implements OnInit {
     if (role === 'confirm') {
       let key = this.route.snapshot.paramMap.get('id')
       this.servicetravel.update(data, key);
-      this.travels.push(data);
-      this.travelDetails = JSON.parse(localStorage.getItem('myTravelDetails' + this.route.snapshot.paramMap.get('id')) as string);
+   
+      this.travelDetails = JSON.parse(localStorage.getItem('myTravelDetails' + key) as string);
     }
   }
 
