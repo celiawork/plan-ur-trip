@@ -32,9 +32,7 @@ export class DetailTravelPage implements OnInit {
     this.travels = []
   }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
   async openFormWay() {
     const modal = await this.modalCtrl.create({
